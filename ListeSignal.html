@@ -1,0 +1,152 @@
+<!doctype html>
+<html >
+<head>
+    <head>
+        <title>Accueil</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+        <link rel="stylesheet" href="lib/js/bootstrap.min.js">
+        
+        <link rel="stylesheet" href="css/style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <link rel="stylesheet" href="lib/node_modules/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+    
+<body ng-app="myApp" >
+
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid justify-content-between">
+      <div class="d-flex">
+        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+        <img src="img/R.png" height="20" alt="MDB Logo" loading="lazy" style="margin-top: 2px;"/>
+        </a>
+          <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="ListeSignal.html">Listes Signal</a>
+      <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="carte.html">Carte</a>
+     
+      
+      </div>      
+      <ul class="navbar-nav flex-row">
+      <li class="nav-item me-3 me-lg-1">
+        <a class="nav-link d-sm-flex align-items-sm-center" href="#">
+          <i class="bi bi-person"></i><strong class="d-none d-sm-block ms-1"></strong>
+        </a>
+      </li>
+      <div ng-controller="out"><button class="btn btn-outline-secondary" ng-click=logout() type="button" aria-expanded="false">Sign out  <i class="bi bi-box-arrow-right"></i></button></div> 
+      </div>
+    </nav>
+  </div>
+      </div>      
+  </div>
+  <div style="width:1000px;height:100px;">
+
+</div>
+
+  <div class="flex-container" ng-controller="andrana" style="top:200px;">
+    <div style="flex-grow: 2; " style="padding-left:50px;width:1000px;height:600px;">
+            <h3 style="text-align: center;text-transform: uppercase;">LISTE SIGNALEMENTS</h3>
+            <div  style="height:50px;"></div>
+            <table class="table table-success table-striped" style="margin-left: 50px;">
+              <thead>
+                  <tr>
+                    
+                    <th scope="col">Image</th>
+                    <th scope="col">dateHeure</th>
+                    <th scope="col">designation</th>
+                    
+                  </tr>
+              </thead>
+              <tbody>
+                        
+                    <tr ng-repeat="signe in signal" ng-click="signale(signe)" onclick="openForm()">
+                      <td scope="row"><img style="width: 50px;" id="ItemPreview" ng-src="data:image/png;base64,{{signe.image}}"></td>
+                      <td scope="row">{{signe.dateheure}}</td>
+                      <td scope="row">{{signe.designation}}</td>
+                      
+                    </tr>
+              </tbody>
+          </table> 
+       
+          <div class="detail-popup" style="width: 600px;height: 900px;">
+            <div class="form-popup" id="popupForm">
+              <form class="form-container" >
+                <h2>Detail Signalement</h2>  
+                <img style="width: 50px;" id="image" ng-src="data:image/png;base64,{{data.image}}"></br>
+                <label for="dateHeure">
+                  <strong>Date et Heure:</strong>
+                </label>
+                <input type="text" id="dateHeure" value="{{data.dateheure}}" name="email" readonly>
+                <label for="designation">
+                  <strong>Designation: </strong>
+                </label>
+                <input type="text" id="designation" value="{{data.designation}}" name="email" readonly>
+                <label for="type">
+                  <strong>Type du Signal:</strong>
+                </label>
+                <input type="text" id="type" value="{{data.nomtype}}" name="email" readonly>
+                <label for="region">
+                  <strong>Region:</strong>
+                </label>
+                <input type="text" id="region" value="{{data.nomregion}}" name="email" readonly>
+            
+                <label for="longitude">
+                  <strong>Statut Actuel:</strong>
+                </label>
+                <input type="text" id="statut" value="{{data.nomstatut}}" name="email" readonly>
+                <button type="button" class="btn cancel" onclick="closeForm()" style="border-radius: 12px;background-color: #f44336;">Fermer</button>
+        
+              
+              </form>
+              
+            </div>
+          </div>
+     </div>   
+    
+        
+       
+
+
+    
+    <div style="flex-grow: 1">
+      <div class="andrana" style="width:400px;height:400px;background-color: aliceblue;margin-left: 100px;">
+        <div style="height:50px;"></div>  
+        <h3 style="text-align: center;text-transform: uppercase;">Filter les donnees</h3>
+          <form class="input-group w-auto my-auto d-none d-sm-flex">
+            <div id="date1"  style="position: absolute;left : 100px;top:20px;"> 
+            <input ng-model="newR.date1" autocomplete="off" type="date" class="form-control rounded" placeholder="Search" style="min-width: 125px;"/>
+            </div>
+            <div id="date2" style="position: absolute;left : 100px;top  : 80px;"> 
+            <input ng-model="newR.date2" autocomplete="off" type="date" class="form-control rounded" placeholder="Search" style="min-width: 125px;"/>
+            </div>
+            <div id="type" width="150px"  style="position: absolute;left :130px;top:140px;"> 
+              <select ng-model="newR.idtype">
+                <option ng-repeat="typ in types" value="{{typ.id}}">{{typ.typesignalement}}</option>
+              </select>
+            </div>
+      
+                <div id="statut" style="position: absolute;left :150px;top: 180px;">
+                <select  ng-model="newR.idstatut">
+                  <option ng-repeat="stat in statuts" value="{{stat.id}}" >{{stat.nomstatut}}</option>
+                </select>
+                
+              </div>
+            <div id="botton" style="position: absolute;left:130px;top:240px">
+            <button  class="botton"  ng-click="recherche(newR)" style="border-radius: 12px; "><span>Recherche</span></button>
+            </div>
+         
+          </form>
+      </div>
+    </div>
+
+</div>
+  
+
+  <script src="lib/jquery.min.js"></script>
+  <script src="lib/angular.min.js"></script>
+  <script src="lib/toastr.min.js"></script>
+  <script src="lib/angular-route.js"></script>
+  <script src="app/controllers.js"></script>
+  <script src="script.js"></script>
+  
+</body>
+</html>

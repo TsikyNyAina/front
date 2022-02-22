@@ -1,0 +1,85 @@
+body {
+  background-color: #a3d5d3;
+  max-height: 100px;
+  margin: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+  ul {
+    list-style-type: none;
+    margin: 20;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+  }
+  
+  li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color on hover */
+  li a:hover {
+    background-color: #555;
+    color: white;
+  }
+  h3{
+    color: #000;
+  }
+
+  .flex-container {
+    display: flex;
+    align-items: stretch;
+    background-color: #f1f1f1;
+    margin-top: 50px;
+  }
+  
+  .flex-container > div {
+    background-color: rgb(233, 236, 240);
+    color: white;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 20px;
+    height: 600px;
+  }
+  .andrana{
+    background-color: rgb(233, 236, 240);
+    color: white;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 20px;
+    height: 100px;
+  
+  }
+  
+  .botton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  .botton span:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  .botton:hover {
+    background-color: #f7c2f9;
+  }
+  .botton:hover span {
+    padding-right: 25px;
+  }
+  .botton:hover span:after {
+    opacity: 1;
+    right: 0;
+  
+  }
